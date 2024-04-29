@@ -1,7 +1,10 @@
 # Jogo Da Velha no Arduino
 
 **Introdução:**
- Ola sou Felipe José e a partir deste briefing vim falar como e para o que serve o meu projeto de jogo da velha no arduino.
+ Ola este briefing vim falar como e para o que serve o meu projeto de jogo da velha no arduino.
+
+ **Autor**
+ Felipe José Ribeiro
 
  **Contextualização:**
  O projeto tem como finalidade recriar o jogo da velha dentro do Arduino, a partir da linguagem C++ do Arduino.
