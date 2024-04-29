@@ -6,6 +6,9 @@
  **Autor**
  Felipe José Ribeiro
 
+**Data**
+29/04/2024
+
  **Contextualização:**
  O projeto tem como finalidade recriar o jogo da velha dentro do Arduino, a partir da linguagem C++ do Arduino.
  
