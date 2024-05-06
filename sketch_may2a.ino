@@ -121,10 +121,10 @@ void loop() {
     if (entrada.length() == 3) {
 
       // Verifica o primeiro caracter se há somente caracteres válidos (0,1,2).
-      if (entrada[0] == "0" || entrada[0] == "1" || entrada[0] == "2") {
+      if (entrada[0] == '0' || entrada[0] == '1' || entrada[0] == '2') {
 
         // Verifica o terceiro caracter se há somente caracteres válidos (0,1,2).
-        if (entrada[2] == "0" || entrada[2] == "1" || entrada[2] == "2") {
+        if (entrada[2] == '0' || entrada[2] == '1' || entrada[2] == '2') {
 
           // Retorna verdadeiro se a entrada da Jogada possui os caracteres e comprimentos válidos.
           entradaValida = true;
