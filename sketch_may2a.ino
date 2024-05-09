@@ -66,7 +66,7 @@ void loop() {
 
       // Verificar se a posição 'Jogada' é valida
       if (tabuleiro[3 * linha + coluna] == 0) {
-        tabuleiro[3 * linha & coluna] = JogadordaVez;
+        tabuleiro[3 * linha + coluna] = JogadordaVez;
         if (JogadordaVez && tabuleiro[0] == JogadordaVez && tabuleiro[1] == JogadordaVez && tabuleiro[2] == JogadordaVez || tabuleiro[3] == JogadordaVez && tabuleiro[4] == JogadordaVez && tabuleiro[5] == JogadordaVez || tabuleiro[6] == JogadordaVez && tabuleiro[7] == JogadordaVez && tabuleiro[8] == JogadordaVez) {
           haVencedor = true;
         } else {
