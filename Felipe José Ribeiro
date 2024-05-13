@@ -1,32 +1,32 @@
-bool validaPosicao(String entrada);
+bool validaPosicao(String entrada); //criei uma função booleana com argumentos declarando esntrada como string
 
 int linha;  //Classifiquei linha como inteiro
 
 int coluna;  //Classifiquei coluna como inteiro
 
-int velha = 1;
+int velha = 1; //aqui defini velha com o valor igual a 1
 
-String Jogada;
+String Jogada; //declarei Jogada como string
 
 bool haVencedor = false;  //Classifiquei haVencedor como Booleano e o atribui como falso
 
 int tabuleiro[9];  //primeiro passo para criar uma matriz
 
-int index;
+int index; //criei uma variavel index como inteiro
 
 
-int JogadordaVez = 1;
+int JogadordaVez = 1; //delcarei JogadordaVez como inteiro e defini valor igual a 1
 
 
 void setup() {
 
-  Serial.begin(9600);
+  Serial.begin(9600); //aqui ele transporta os bytes para a serial
 }
 
 
 void loop() {
   for (index = 0; index <= 8; index++) {
-    tabuleiro[index] = 0;
+    tabuleiro[index] = 0;//serve para zerar o tabuleiro todo inicio de partida
   }
 
   do {
@@ -38,27 +38,25 @@ void loop() {
     Serial.println(tabuleiro[5]);
     Serial.print(tabuleiro[6]);
     Serial.print(tabuleiro[7]);
-    Serial.println(tabuleiro[8]);
+    Serial.println(tabuleiro[8]);//esses Serial.print/println servem para imprimir o tabuleiro
 
-    Jogada = "";
+    Jogada = ""; //coloca Jogada como uma string vazia
     Serial.print("Digite a sua casa Jogador ");
-    Serial.println(JogadordaVez);
-    while (!Serial.available())
+    Serial.println(JogadordaVez); //imprime a menssagem para o Jogador da vez jogar
+    while (!Serial.available()) //serve para só funcionar o resto da programação caso algo seja digitado e enviado a porta da Serial
       ;
  
-    String Jogada = Serial.readString();
+    String Jogada = Serial.readString();//serve para ler o valor colocado
 
     // lê o dado recebido:
     //Jogada = Serial.read();
 
-    if (validaPosicao(Jogada)) {
+    if (validaPosicao(Jogada)) { 
 
-      // Converter a Jogada texto em dois inteiros linha e coluna.
-      // Simula a função Serial.parseInt() do Arduino
-      linha = int(Jogada[0]) - '0';
+      linha = int(Jogada[0]) - '0'; 
 
       // CORRIGIR O ERRO DE DIGITAÇÃO
-      coluna = int(Jogada[2]) - '0';
+      coluna = int(Jogada[2]) - '0';//tanto esse "coluna" tanto o "linha" servem para verificar se o valor escrito na serial é permitido
       Serial.print("Linha: ");
       Serial.print(linha);
       Serial.print(", Coluna: ");
@@ -68,47 +66,44 @@ void loop() {
       if (tabuleiro[3 * linha + coluna] == 0) {
         tabuleiro[3 * linha + coluna] = JogadordaVez;
         if (JogadordaVez && tabuleiro[0] == JogadordaVez && tabuleiro[1] == JogadordaVez && tabuleiro[2] == JogadordaVez || tabuleiro[3] == JogadordaVez && tabuleiro[4] == JogadordaVez && tabuleiro[5] == JogadordaVez || tabuleiro[6] == JogadordaVez && tabuleiro[7] == JogadordaVez && tabuleiro[8] == JogadordaVez) {
-          haVencedor = true;
+          haVencedor = true;//aqui ele verifica se há alguma posição vazia na linha, se não tiver o jogador da vez ganhou, se tiver passa para o proximo 
         } else {
 
           // Verificar a Jogada vencedora nas colunas.
           if (JogadordaVez && tabuleiro[0] == JogadordaVez && tabuleiro[3] == JogadordaVez && tabuleiro[6] == JogadordaVez || tabuleiro[1] == JogadordaVez && tabuleiro[4] == JogadordaVez && tabuleiro[7] == JogadordaVez || tabuleiro[2] == JogadordaVez && tabuleiro[5] == JogadordaVez && tabuleiro[8] == JogadordaVez) {
-            haVencedor = true;
+            haVencedor = true;//aqui ele verifica se há alguma posição vazia na coluna, se não tiver o jogador da vez ganhou, se tiver passa para o proximo
           } else {
 
             // Verificar a Jogada vencedora nas diagonais.
             if (JogadordaVez && tabuleiro[0] == JogadordaVez && tabuleiro[4] == JogadordaVez && tabuleiro[8] == JogadordaVez || tabuleiro[2] == JogadordaVez && tabuleiro[4] == JogadordaVez && tabuleiro[6] == JogadordaVez) {
-              haVencedor = true;
+              haVencedor = true;//aqui ele verifica se há alguma posição vazia nas verticais, se não tiver o jogador da vez ganhou, se tiver passa para o proximo
             } else {
 
               // Trocar o jogador
               if (JogadordaVez == 1) {
                 JogadordaVez = 2;
               } else {
-                JogadordaVez = 1;
+                JogadordaVez = 1;//troca o jogador
               }
             }
           }
         }
         velha = velha + 1;
       } else {
-        Serial.println("Posição ocupada, jogue novamente !!!");
+        Serial.println("Posição ocupada, jogue novamente !!!");//caso tenha um valor naquela casa ele envia essa menssagem
 
         // Informar ao Jogador 1 que a posição está preenchida, é inválida e ele precisa informar um posição válida.
       }
     } else {
-      Serial.println("Jogada inválida !!!");
+      Serial.println("Jogada inválida !!!");//caso o valor colocado na serial não seja permitido envia essa menssagem 
     }
 
-    // Verificar a Jogada vencedora nas linhas.
-
-
-  } while (!haVencedor && velha <= 9);
-  // Verificar o tabuleiro, se houve ganhador ou empate, finalizar o jogo.
+  } while (!haVencedor && velha <= 9);//finaliza a função, para caso nem um jogador venceu na rodada ele aumenta o valor de velha até 9, que se chegar vai dar velha
+  
   if (haVencedor) {
-    Serial.println("Parabéns pela a vitória, jogador" + JogadordaVez);
+    Serial.println("Parabéns pela a vitória, jogador" + JogadordaVez);//menssagem de vitória
   } else {
-    Serial.println("Deu VELHA!!!");
+    Serial.println("Deu VELHA!!!");//menssagem de empate
   }
   Serial.print(tabuleiro[0]);
   Serial.print(tabuleiro[1]);
@@ -118,7 +113,7 @@ void loop() {
   Serial.println(tabuleiro[5]);
   Serial.print(tabuleiro[6]);
   Serial.print(tabuleiro[7]);
-  Serial.println(tabuleiro[8]);
+  Serial.println(tabuleiro[8]);//imprime o tabuleiro
 }
 
 
@@ -143,5 +138,5 @@ bool validaPosicao(String entrada) {
       }
     }
   }
-  return entradaValida;
+  return entradaValida;//retorna a função entrada valida
 }
